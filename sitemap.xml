@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.xuxinting.cn/2017/08/05/A-UDP-code/</loc>
+    
+    <lastmod>2017-08-05T11:49:09.615Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.xuxinting.cn/about/index.html</loc>
     
     <lastmod>2017-08-01T12:41:22.706Z</lastmod>
@@ -9,7 +16,7 @@
   </url>
   
   <url>
-    <loc>http://www.xuxinting.cn/2017/08/01/hello-world/</loc>
+    <loc>http://www.xuxinting.cn/hello-world.html</loc>
     
     <lastmod>2017-08-01T02:11:05.736Z</lastmod>
     

@@ -3,14 +3,13 @@
 
 
     
-    
   <url>
-    <loc>http://www.xuxinting.cn/2017/08/01/hello-world/</loc>
-    <lastmod>2017-08-01T02:11:05.736Z</lastmod>
+    <loc>http://www.xuxinting.cn/2017/08/05/A-UDP-code/</loc>
+    <lastmod>2017-08-05T11:49:09.615Z</lastmod>
     <data>
         <display>
-        <title>Hello World</title>
-        <pubTime>2017-08-01T02:11:05.736Z</pubTime>
+        <title>一个简单的UDP测试程序</title>
+        <pubTime>2017-08-04T16:00:00.000Z</pubTime>
         
          
            
@@ -18,4 +17,6 @@
     </data>
     </url>
 
+    
+    
 </urlset>
