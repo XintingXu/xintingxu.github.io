@@ -5,14 +5,23 @@
     
   <url>
     <loc>http://www.xuxinting.cn/2017/08/05/A-UDP-code/</loc>
-    <lastmod>2017-08-05T11:49:09.615Z</lastmod>
+    <lastmod>2017-08-06T06:29:39.309Z</lastmod>
     <data>
         <display>
         <title>一个简单的UDP测试程序</title>
         <pubTime>2017-08-04T16:00:00.000Z</pubTime>
         
+        <tag>C</tag>
+         
+        <tag>UDP</tag>
+         
+        <tag>Linux</tag>
+         
          
            
+             
+              <breadCrumb title="Blog" url="http://www.xuxinting.cn/categories/blog/"/>
+          
         </display>
     </data>
     </url>
