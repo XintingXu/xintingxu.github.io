@@ -27,7 +27,7 @@ categories: [Blog]
 
 ### 一：数据库保持连接，频繁commit
 
-{% codeblock lang=Python %}
+{% codeblock lang:Python %}
 def form1():
     db = MySQLdb.connect(db_url,db_user,db_pass,db_name,charset='utf8')
     cursor = db.cursor()
@@ -43,7 +43,7 @@ def form1():
 
 ### 二：数据库保持连接，最后一次commit
 
-{% codeblock lang=Python %}
+{% codeblock lang:Python %}
 def form2():
     db = MySQLdb.connect(db_url,db_user,db_pass,db_name,charset='utf8')
     cursor = db.cursor()
@@ -59,7 +59,7 @@ def form2():
 
 ### 三：在数据库操作前连接，操作完成后关闭
 
-{% codeblock lang=Python %}
+{% codeblock lang:Python %}
 def form3():
     for i in range (1,1000000):
         db = MySQLdb.connect(db_url,db_user,db_pass,db_name,charset='utf8')
@@ -99,5 +99,5 @@ form3 :  328.88110945000005
 
 
 
-> 
+>
 以上内容均为本人学习过程中的测试和分析，如果有任何问题，欢迎批评指正。
