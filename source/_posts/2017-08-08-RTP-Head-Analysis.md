@@ -11,6 +11,8 @@ VoLTE是Voice over Long Term Evolution的缩写，也就是基于LTE网络的语
 
 在我们的测试中，采用Samsung A5108移动定制机作为测试终端，TCPDUMP作为抓包工具。得到的结果在WireShark中进行分析。
 
+<!-- more -->
+
 ## VoLTE包结构
 
 VoLTE的数据包主要分为以下几类：

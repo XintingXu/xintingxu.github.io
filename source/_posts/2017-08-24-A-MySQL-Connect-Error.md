@@ -12,7 +12,12 @@ _mysql_exceptions.OperationalError: (2003, "Can't connect to MySQL server on '10
 
 连接方式为Python3 的 MySQLdb包
 
-MySQL版本：```5.7.19-0ubuntu0.16.04.1```
+MySQL版本： 
+``` 
+5.7.19-0ubuntu0.16.04.1 
+```
+
+<!-- more -->
 
 ## 问题排查
 首先考虑到MySQL服务器没有进行网关的配置，怀疑是网关拦截了连接。
@@ -24,8 +29,11 @@ MySQL版本：```5.7.19-0ubuntu0.16.04.1```
 ## 问题解决
 修改MySQL服务器的配置文件，注释掉监听IP配置
 
-配置文件路径：``` /etc/mysql/mysql.conf.d/mysqld.cnf ```
+配置文件路径：
+``` 
+/etc/mysql/mysql.conf.d/mysqld.cnf 
+```
 
-``` [mysqld] ```组中，有一条配置``` bind-address = 127.0.0.1 ```
+``` [mysqld] ``` 组中，有一条配置 ``` bind-address = 127.0.0.1 ```
 
 将该条注释掉，然后重启MySQL服务，即可正常连接
