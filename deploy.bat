@@ -1,1 +1,1 @@
-start cmd /k "hexo d -g && git add * -f && git commit -m "update" && git push"
+start cmd /k "hexo d -g && git add * && git commit -m "update" && git push"
