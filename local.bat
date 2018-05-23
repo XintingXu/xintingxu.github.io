@@ -1,1 +1,1 @@
-hexo s -g
+hexo generate
