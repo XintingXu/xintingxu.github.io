@@ -7,8 +7,8 @@ title: 雁家
 subtitle: 徐欣廷的自留地
 description: 个人博客
 keywords: 博客, 开发, 计算机, 编程
-author: XintingXu
-language: zh-Hans
+author: Xinting Xu
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -106,3 +106,93 @@ jsonContent:
     excerpt: false
     categories: false
     tags: true
+
+theme_config:
+  favicon:
+    small: /favicon.ico
+    medium: /favicon.ico
+    apple_touch_icon: /favicon.ico
+    safari_pinned_tab: /favicon.ico
+
+  footer:
+    beian:
+      enable: true
+      icp: "京ICP备19044096号-1"
+
+  menu:
+    home: / || home
+    about: /about/ || user
+    tags: /tags/ || tags
+    categories: /categories/ || th
+    archives: /archives/ || archive
+
+  social:
+    GitHub: https://github.com/XintingXu || github
+    E-Mail: mailto:xxt.no1@gmail.com || envelope
+    Weibo: https://weibo.com/xuxinting95 || weibo
+    FB Page: https://www.facebook.com/XintingXu95 || facebook
+
+  # Reading progress bar
+  reading_progress:
+    enable: true
+    # Available values: top | bottom
+    position: top
+    color: "#37c6c0"
+    height: 3px
+
+  # Bookmark Support
+  bookmark:
+    enable: true
+    # Customize the color of the bookmark.
+    color: "#222"
+    # If auto, save the reading progress when closing the page or clicking the bookmark-icon.
+    # If manual, only save it by clicking the bookmark-icon.
+    save: auto
+
+  # `Follow me on GitHub` banner in the top-right corner.
+  github_banner:
+    enable: true
+    permalink: https://github.com/XintingXu/
+    title: Follow me on GitHub
+
+  # Local Search
+  # Dependencies: https://github.com/theme-next/hexo-generator-searchdb
+  local_search:
+    enable: true
+    # If auto, trigger search by changing input.
+    # If manual, trigger search by pressing enter key or search button.
+    trigger: auto
+    # Show top n results per article, show all results by setting to -1
+    top_n_per_article: 1
+    # Unescape html strings to the readable one.
+    unescape: false
+    # Preload the search data when the page loads.
+    preload: false
+
+  sidebar:
+    # Sidebar Position.
+    position: left
+    #position: right
+
+    # Sidebar Display (only for Muse | Mist), available values:
+    #  - post    expand on posts automatically. Default.
+    #  - always  expand for all pages automatically.
+    #  - hide    expand only when click on the sidebar toggle icon.
+    #  - remove  totally remove sidebar including sidebar toggle.
+    display: always 
+
+    # Sidebar padding in pixels.
+    padding: 18
+    # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).
+    offset: 12
+    # Enable sidebar on narrow view (only for Muse | Mist).
+    onmobile: false
+
+  # Sidebar Avatar
+  avatar:
+    # Replace the default image and set the url here.
+    url: /about/xuxinting_1inch_small_image.jpg
+    # If true, the avatar will be dispalyed in circle.
+    rounded: false
+    # If true, the avatar will be rotated with the cursor.
+    rotated: false

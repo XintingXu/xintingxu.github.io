@@ -29,11 +29,11 @@ VoLTE的数据包主要分为以下几类：
 
 用文本编辑器，比如NotePad++或者Edit Plus。取决于抓包文件的大小。如果是小文件，可以用NotePad++打开，但如果文件过大，就需要用Edit Plus了。Edit Plus的好处，就是具有64位版本，在数据处理能力上略胜一筹。
 
-![](http://data.xuxinting.cn/xuxinting/2017-08-08/capture-volte-head.jpg)
+![](/images/2017-08-08/capture-volte-head.jpg)
 
 在开始，可以看见邀请消息“INVITE”，以及双方的电话信息、IPv6地址、所属网络等身份信息。
 
-![](http://data.xuxinting.cn/xuxinting/2017-08-08/capture-volte-voice-support.jpg)
+![](/images/2017-08-08/capture-volte-voice-support.jpg)
 
 在下面的数据中，可以看到不同语音编码方式，这和WireShark分析得到的PT类型是对应的。并且，不同类型的采样频率，是计算RTP时间戳的重要依据。
 
@@ -41,7 +41,7 @@ VoLTE的数据包主要分为以下几类：
 
 RTP包是通过UDP协议进行传输的，在UDP的负载中，包含着RTP的数据帧。
 
-![](http://data.xuxinting.cn/xuxinting/2017-08-08/capture-rtp-header.jpg)
+![](/images/2017-08-08/capture-rtp-header.jpg)
 
     version (V): 2 bits
       This field identifies the version of RTP.The version defined by
@@ -61,7 +61,7 @@ RTP包是通过UDP协议进行传输的，在UDP的负载中，包含着RTP的�
       If the extension bit is set, the fixed header MUST be followed by
       exactly one header extension, with a format defined below.
       
-![](/images/capture-rtp-header-extension.jpg)
+![](/images/2017-08-08/capture-rtp-header-extension.jpg)
       
       RTP头是否进行了拓展，否则必须按照特定的格式进行。
 
@@ -127,11 +127,11 @@ RTP包是通过UDP协议进行传输的，在UDP的负载中，包含着RTP的�
 
 得到PT值之后，需要对照通话控制包中的格式及帧率的对应关系，用来进一步计算。
 
-以我们的测试为例，对于数据包ｉ和ｊ，具有不同的TimeStamp值Ｔｉ和Ｔｊ。
-PT类型１１５对应的时钟频率为ｆ＝９００００Ｈｚ，视频帧率为ｆｐｓ＝３０ｆｐｓ。
+以我们的测试为例，对于数据包i和j，具有不同的TimeStamp值*T<sub>i</sub>*和*T<sub>j</sub>*。
+PT类型115对应的时钟频率为*f* = 90000 Hz，视频帧率为*fps* = 30 fps。
 
 那么，真实的数据帧时间间隔是多少呢？
 
-ΔT＝（Ｔｉ－Ｔｊ）／（ｆ／ｆｐｓ）＊（１／ｆｐｓ）（秒）
+*ΔT* ＝ (*T<sub>i</sub>* - *T<sub>j</sub>*) / (*f* / *fps*) * (1 / *fps*) (s)
 
-时间戳的默认递增长度，是时钟频率／帧率，但在我们的测试中，发现其递增规律，并不是严格的３０００，而是会在一定范围内浮动。通过数学计算，发现：虽然存在浮动，但仍然存在严格的比例，即TimeStamp的３０００对应真实的１／３０秒。
+时间戳的默认递增长度，是时钟频率/帧率，但在我们的测试中，发现其递增规律，并不是严格的3000，而是会在一定范围内浮动。通过数学计算，发现：虽然存在浮动，但仍然存在严格的比例，即TimeStamp的3000对应真实的1/30秒。

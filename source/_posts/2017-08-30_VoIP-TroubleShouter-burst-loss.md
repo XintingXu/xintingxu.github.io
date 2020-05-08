@@ -34,7 +34,7 @@ IP的丢包以突发性丢包为主，但是对于常见的几种丢包模型，
 ### Markov模型
 马可夫模型是一种通用的多状态模型，在这种模型中，状态i和j的转换存在着概率p(i, j)。一个2状态的马可夫模型具有一些优势，它可以捕获短期内丢包间的依赖，例如丢包序列[1,4,15,19]。这些通常是非常短的事件（1到3个包长度），但是偶然的链式失败，可以导致长达几十秒的长丢包序列。通过结合2态模型与Gilbert-Elliott模型，可以捕获包括短期连续时间和长期低密度时间。
 
-![马可夫模型](http://data.xuxinting.cn/xuxinting/2017-08-30/markov-model.jpg)
+![马可夫模型](/images/2017-08-30/markov-model.jpg)
 
 这种4状态马可夫模型，[7,12]代表爆发期和间隙期。在爆发期中，数据包的接受和丢失，都根据初试的2状态模型。在间隙期中，数据包的接受和丢失，都根据第二个2状态模型。
 
@@ -55,7 +55,7 @@ IP的丢包以突发性丢包为主，但是对于常见的几种丢包模型，
 ### 跟踪描述
 下面的跟踪结果，是哥伦比亚大学、马萨诸塞大学、印度理工学院的研究人员获得的300万个包中的一部分。这些数据通过美国、欧洲、亚洲的不同网站之间进行10ms或30ms间隔的UDP或RTP交流的追踪结果。多数的追踪包含单路延迟和数据包丢失，不过有一部分只有数据包丢失。
 
-![典型的追踪结果](http://data.xuxinting.cn/xuxinting/2017-08-30/trace_example.jpg)
+![典型的追踪结果](/images/2017-08-30/trace_example.jpg)
 
 ### 跟踪分析
 有些跟踪，是用上面提到的4状态Markov模型分析的，与此同时，结果解释为一个Gilbert-Elliott模型。这就给出了爆发期和间隙期的长度和丢包密度的定义，爆发期的丢包密度要比间隙期的丢包密度大。
@@ -64,13 +64,13 @@ IP的丢包以突发性丢包为主，但是对于常见的几种丢包模型，
 
 关于W1的追踪有两个表，第一个表显示的是突发长度与突发权重的散点图。显而易见，超过300个数据包的的突发性事件是存在的，并且典型的损耗密度是25%。并且，在45°对角线上有一些孤立的点，对应着一些由连接失败导致的长段突发性丢包概率。
 
-[](http://data.xuxinting.cn/xuxinting/2017-08-30/trace_w1_dist.jpg)
+![](/images/2017-08-30/trace_w1_dist.jpg)
 
 Figure 3. Trace W1 Scatter diagram of Burst Length vs Weight for packet loss only
 
 第二个图表，显示的是突发长度和突发权重的散点图，但是引入了30ms的抖动缓冲大小。这和图3的单一丢包图分布相近，说明抖动并不是在这个追踪过程中一个非常重要的因素。
 
-[](http://data.xuxinting.cn/xuxinting/2017-08-30/trace_w1_lossdisc.jpg)
+![](/images/2017-08-30/trace_w1_lossdisc.jpg)
 
 Figure 4. Trace W1 Scatter diagram of Burst Length vs Weight for combined packet loss and packet discard (30mS jitter buffer)
  
@@ -78,13 +78,13 @@ Figure 4. Trace W1 Scatter diagram of Burst Length vs Weight for combined packet
 ### 追踪3
 和追踪3相关的图表有2个，第一张图显示的是Gilbert模型下，突发长度和突发权重的散点图。在图中可以清晰地看见超过100长度的突发也发生了，并且具有典型的20-25%的丢包密度。
 
-![](http://data.xuxinting.cn/xuxinting/2017-08-30/trace_w3_loss.jpg)
+![](/images/2017-08-30/trace_w3_loss.jpg)
 
 Figure 4. Trace W3 Scatter diagram of Burst Length vs Weight for packet loss only
 
 第二张表，显示的是在50ms的抖动缓冲下，突发长度和突发权重的散点图。这幅图表明，抖动是追踪中的一个非常显著的问题。突发密度达到500个数据包时，也就意味着突发密度接近30%
 
-![](http://data.xuxinting.cn/xuxinting/2017-08-30/trace_w3_lossdisc.jpg)
+![](/images/2017-08-30/trace_w3_lossdisc.jpg)
 
 Figure 5. Trace W3 Scatter diagram of Burst Length vs Weight for packet loss and packet discard (50mS jitter buffer)
 
