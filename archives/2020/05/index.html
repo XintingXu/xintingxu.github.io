@@ -20,20 +20,21 @@
     var CONFIG = {"hostname":"www.xuxinting.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="在LXC容器中进行时区的设置虽然LXC容器在使用上和物理机没有区别，但是因为缺少安装过程中的配置操作，在一些配置上会出现问题。 比如时区的问题，虽然容器中的时间和宿主机的时间是对应的，但是容器中的默认时区为空，导致时间转换上存在不一致的问题。以我们为例，宿主机上的时间是CST，也就是东八区时间；但是容器中默认为UTC+0时区，所以会有8小时的时差。 解决方案在容器中进行时区配置之前试过导入时区等方">
-<meta property="og:type" content="article">
-<meta property="og:title" content="910实验室服务器配置-LXC容器中时区设置">
-<meta property="og:url" content="http://www.xuxinting.cn/2018/06/23/2018-06-23-910%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-LXC%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%97%B6%E5%8C%BA%E8%AE%BE%E7%BD%AE/index.html">
+  <meta name="description" content="个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="雁家">
+<meta property="og:url" content="http://www.xuxinting.cn/archives/2020/05/index.html">
 <meta property="og:site_name" content="雁家">
-<meta property="og:description" content="在LXC容器中进行时区的设置虽然LXC容器在使用上和物理机没有区别，但是因为缺少安装过程中的配置操作，在一些配置上会出现问题。 比如时区的问题，虽然容器中的时间和宿主机的时间是对应的，但是容器中的默认时区为空，导致时间转换上存在不一致的问题。以我们为例，宿主机上的时间是CST，也就是东八区时间；但是容器中默认为UTC+0时区，所以会有8小时的时差。 解决方案在容器中进行时区配置之前试过导入时区等方">
+<meta property="og:description" content="个人博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2018-06-22T18:30:09.833Z">
-<meta property="article:modified_time" content="2020-05-08T13:00:22.676Z">
 <meta property="article:author" content="Xinting Xu">
-<meta property="article:tag" content="910实验室服务器">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content=" 开发">
+<meta property="article:tag" content=" 计算机">
+<meta property="article:tag" content=" 编程">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.xuxinting.cn/2018/06/23/2018-06-23-910%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-LXC%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%97%B6%E5%8C%BA%E8%AE%BE%E7%BD%AE/">
+<link rel="canonical" href="http://www.xuxinting.cn/archives/2020/05/">
 
 
 <script id="page-configurations">
@@ -41,12 +42,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>910实验室服务器配置-LXC容器中时区设置 | 雁家</title>
+  <title>归档 | 雁家</title>
   
 
 
@@ -192,104 +193,50 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content archive">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.xuxinting.cn/2018/06/23/2018-06-23-910%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-LXC%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%97%B6%E5%8C%BA%E8%AE%BE%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/about/xuxinting_1inch_small_image.jpg">
-      <meta itemprop="name" content="Xinting Xu">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雁家">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          910实验室服务器配置-LXC容器中时区设置
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-06-23 02:30:09" itemprop="dateCreated datePublished" datetime="2018-06-23T02:30:09+08:00">2018-06-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-08 21:00:22" itemprop="dateModified" datetime="2020-05-08T21:00:22+08:00">2020-05-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/log/" itemprop="url" rel="index"><span itemprop="name">Log</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <span class="collection-header">嗯..! 目前共计 22 篇日志。 继续努力。</span>
+      </div>
 
       
-        <h2 id="在LXC容器中进行时区的设置"><a href="#在LXC容器中进行时区的设置" class="headerlink" title="在LXC容器中进行时区的设置"></a>在LXC容器中进行时区的设置</h2><p>虽然LXC容器在使用上和物理机没有区别，但是因为缺少安装过程中的配置操作，在一些配置上会出现问题。</p>
-<p>比如时区的问题，虽然容器中的时间和宿主机的时间是对应的，但是容器中的默认时区为空，导致时间转换上存在不一致的问题。<br>以我们为例，宿主机上的时间是CST，也就是东八区时间；但是容器中默认为UTC+0时区，所以会有8小时的时差。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="在容器中进行时区配置"><a href="#在容器中进行时区配置" class="headerlink" title="在容器中进行时区配置"></a>在容器中进行时区配置</h3><p>之前试过导入时区等方式，但效果不太好。</p>
-<p>最近发现有一个比较方便的方法，可以直接将时区修改为目标时区。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg-reconfigure tzdata</span><br></pre></td></tr></table></figure>
-<p>在LXC容器中运行上面的命令，根据出现的辅助界面，选择Asian-&gt;Shanghai，即可完成时区的更改。</p>
-<p>通过这种方式，即使容器和宿主机进行了重启，仍然可以确保时区的配置是有效的。</p>
-
+    <div class="collection-year">
+      <span class="collection-header">2020</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/910%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 910实验室服务器</a>
-          </div>
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-05-28T22:16:00+08:00"
+              content="2020-05-28">
+          05-28
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/2020/05/28/2020-05-28-25%E5%B2%81%EF%BC%8C%E4%B8%8E%E5%91%BD%E8%BF%90%E5%AF%B9%E8%B5%8C/" itemprop="url">
+            <span itemprop="name">25岁，与命运对赌</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2018/05/23/2018-05-23-23%E5%B2%81%EF%BC%8C%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/" rel="prev" title="23岁，新的开始">
-      <i class="fa fa-chevron-left"></i> 23岁，新的开始
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/28/2020-05-28-25%E5%B2%81%EF%BC%8C%E4%B8%8E%E5%91%BD%E8%BF%90%E5%AF%B9%E8%B5%8C/" rel="next" title="25岁，与命运对赌">
-      25岁，与命运对赌 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+
+    </div>
+  </div>
   
   
+  
+
   
 
 
@@ -342,7 +289,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在LXC容器中进行时区的设置"><span class="nav-number">1.</span> <span class="nav-text">在LXC容器中进行时区的设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在容器中进行时区配置"><span class="nav-number">2.1.</span> <span class="nav-text">在容器中进行时区配置</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
