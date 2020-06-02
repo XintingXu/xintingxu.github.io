@@ -841,4 +841,164 @@ CSRC list: 0 to 15 items, 32 bits each
         <tag>随笔</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Leetcode-459 Repeated Substring Pattern</title>
+    <url>/2020/06/02/2020-06-02-Leetcode-459/</url>
+    <content><![CDATA[<h2 id="459-Repeated-Substring-Pattern"><a href="#459-Repeated-Substring-Pattern" class="headerlink" title="459 Repeated Substring Pattern"></a>459 Repeated Substring Pattern</h2><p>判断字符串是否为子串重复构成，输入字符串的长度在10000内。</p>
+<p>例如，’abab’由’ab’循环两次构成，’aa’由’a’循环两次构成。</p>
+<a id="more"></a>
+
+<h2 id="1-解决思路"><a href="#1-解决思路" class="headerlink" title="1. 解决思路"></a>1. 解决思路</h2><h3 id="1-1-双指针"><a href="#1-1-双指针" class="headerlink" title="1.1 双指针"></a>1.1 双指针</h3><p>双指针是最直接的方式，固定头指针的位置，移动尾指针，知道找到一个重复的子串，然后对剩余的部分进行子串验证。</p>
+<p>如果字符串是由子串重复生成的，则一定存在一个最小子串。例如，’aaaa’由’aa’重复两次构成，同时也是’a’重复四次构成。但’aa’是’a’重复两次构成的，因此，识别出最小子串’a’即可。</p>
+<p>双指针法的时间复杂度为O(n<sup>2</sup>)，空间复杂度为O(1)。</p>
+<pre><code>bool repeatedSubstringPattern(char *s){
+    if (s == NULL) {
+        return false;
+    }
+    bool result = false;
+
+    char *begin = s;
+    char *end = s + 1;
+    while (*end != 0) {
+        while (*end != 0 &amp;&amp; *begin != *end) {
+            ++ end;
+        }
+        if (*end == 0) {
+            break;
+        }
+
+        char *temp_end = end;
+        char *temp_begin = begin;
+        while (*temp_end != 0 &amp;&amp; *temp_begin == *temp_end) {
+            ++ temp_begin;
+            ++ temp_end;
+        }
+        if (*temp_end == 0 &amp;&amp; (temp_end - end) % (end - begin) == 0) {
+            result = true;
+            break;
+        }
+
+        ++ end;
+    }
+
+    return result;
+}</code></pre><h3 id="1-2-掐头去尾"><a href="#1-2-掐头去尾" class="headerlink" title="1.2 掐头去尾"></a>1.2 掐头去尾</h3><p>假设一个字符串有子串重复构成，则第一个字符一定是子串的首字符，同时最后一个字符为子串的尾字符。</p>
+<p>所谓掐头去尾，分别包括掐头和去尾两步。如果字符串由子串重复构成，则字符串中的子串至少出现一次，掐头则破坏了第一个子串，去尾则破坏了最后一个子串。将掐头及去尾的结果拼接，如果中间的部分与原字符串一致，则意味着符合重复条件。</p>
+<p>例如，’abcabcabc’由’abc’重复三次构成，掐头后剩余’bcabcabc’，去尾后剩余’abcabcab’，拼接得到’bcabcabcabcabcab’，重复的结果只剩下四次。在’bcabcabcabcabcab’中搜索’abcabcabc’，如果匹配，则证明符合重复规则。</p>
+<p>如果S由一系列子串构成，即S<sub>1</sub> S<sub>2</sub> S<sub>3</sub> …  S<sub>i</sub> … S<sub>n</sub>。如果S由子串重复构成，则S<sub>1</sub> = S<sub>2</sub> = S<sub>3</sub> = S<sub>i</sub> = S<sub>n</sub>。掐头即破坏S<sub>1</sub>，去尾即破坏S<sub>n</sub>，拼接后的构成为S<sub>2</sub> S<sub>3</sub> …  S<sub>i</sub> … S<sub>n</sub> S<sub>1</sub> S<sub>2</sub> S<sub>3</sub> …  S<sub>i</sub> … S<sub>n-1</sub>。当拼接结果中仍然存在S，则满足S<sub>2</sub> = S<sub>1</sub>，S<sub>3</sub> = S<sub>2</sub>，S<sub>i + 1</sub> = S<sub>i</sub>，S<sub>n</sub> = S<sub>n - 1</sub>，S<sub>n</sub> = S<sub>1</sub>，汇总即S<sub>1</sub> = S<sub>2</sub> = S<sub>3</sub> = S<sub>i</sub> = S<sub>n</sub>。</p>
+<p>掐头去尾的时间复杂度为O(n)，空间复杂度为O(n)。</p>
+<pre><code>bool repeatedSubstringPattern(char *s){
+    if (s == NULL) {
+        return false;
+    }
+    bool result = false;
+
+    int s_len = strlen(s);
+    char *s_s = (char *)malloc(sizeof(char) * s_len * 2 - 2);
+
+    memcpy_s(s_s, s_len * 2 - 2, s + 1, s_len - 1);
+    memcpy_s(s_s + s_len - 1, s_len - 1, s, s_len - 1);
+
+    for (int index = 0 ; index &lt;= s_len - 2 ; ++ index) {
+        if (*s == *(s_s + index) &amp;&amp; memcmp(s, s_s + index, s_len) == 0) {
+            result = true;
+            break;
+        }
+    }
+
+    free(s_s);
+    return result;
+}</code></pre>]]></content>
+      <categories>
+        <category>Log</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode-463 Island Perimeter</title>
+    <url>/2020/06/02/2020-06-02-Leetcode-463/</url>
+    <content><![CDATA[<h2 id="463-Island-Perimeter"><a href="#463-Island-Perimeter" class="headerlink" title="463  Island Perimeter"></a>463  Island Perimeter</h2><p>给出岛屿地图，求解岛屿的周长。岛屿可能有多个块组成，所有的块连接成为一个大岛。</p>
+<pre><code>[0,1,0,0]
+[1,1,1,0]
+[0,1,0,0]
+[1,1,0,0]</code></pre><a id="more"></a>
+
+<h2 id="1-解决思路"><a href="#1-解决思路" class="headerlink" title="1. 解决思路"></a>1. 解决思路</h2><h3 id="1-1-两次遍历"><a href="#1-1-两次遍历" class="headerlink" title="1.1 两次遍历"></a>1.1 两次遍历</h3><p>根据岛屿的特征，只有出现0-1跳变的位置才存在边界，因此按照行序、列序进行两次遍历，对所有的跳变位置进行统计，即可得到最终的周长。</p>
+<p>该方法的时间复杂度为O(n<sup>2</sup>)，空间复杂度为O(1)，但进行列序遍历时，由于Cache命中的问题，效率较低。</p>
+<pre><code>int islandPerimeter(int** grid, int gridSize, int* gridColSize){
+    if (grid == NULL || gridColSize == NULL || gridSize == 0) {
+        return 0;
+    }
+    int result = 0;
+
+    // for vertical borders
+    for (int row = 0 ; row &lt; gridSize ; ++ row) {
+        if (**(grid + row) == 1) {
+            ++ result;
+        }
+        for (int col = 0 ; col &lt; *(gridColSize + row) - 1 ; ++ col) {
+            if (*(*(grid + row) + col) != *(*(grid + row) + col + 1)) {
+                ++ result;
+            }
+        }
+        if (*(*(grid + row) + *(gridColSize + row) - 1) == 1) {
+            ++ result;
+        }
+    }
+
+    // for horizontal borders
+    for (int col = 0 ; col &lt; *gridColSize ; ++ col) {
+        if (*(*grid + col) == 1) {
+            ++ result;
+        }
+        for (int row = 0 ; row &lt; gridSize - 1; ++ row) {
+            if (*(*(grid + row) + col) != *(*(grid + row + 1) + col)) {
+                ++ result;
+            }
+        }
+        if (*(*(grid + gridSize - 1) + col) == 1) {
+            ++ result;
+        }
+    }
+
+    return result;
+}</code></pre><h3 id="1-2-关联遍历"><a href="#1-2-关联遍历" class="headerlink" title="1.2 关联遍历"></a>1.2 关联遍历</h3><p>对于单个位置来说，当没有相邻陆地时，存在4条边界。每存在一个相邻陆地，则两个陆地各减少一条边界。因此，遍历过程中，对相邻情况进行判断。按照左上角到右下角的顺序，判断是否为陆地。如果为陆地，则其右侧及下方是否为陆地。两者分别统计，得到的陆地数*4，减去相邻数*2，即为最终的边界周长。</p>
+<p>该方法的时间复杂度为O(n<sup>2</sup>)，空间复杂度为O(1)，但遍历中Cache效率较低。</p>
+<pre><code>int islandPerimeter(int** grid, int gridSize, int* gridColSize){
+    if (grid == NULL || gridColSize == NULL || gridSize == 0) {
+        return 0;
+    }
+    int result = 0;
+    int inside = 0;
+
+    for (int row = 0 ; row &lt; gridSize ; ++ row) {
+        for (int col = 0 ; col &lt; *(gridColSize + row) ; ++ col) {
+            if (*(*(grid + row) + col) == 1) {
+                ++ result;
+
+                if (col &lt; *(gridColSize + row) - 1 &amp;&amp; *(*(grid + row) + col + 1) == 1) {
+                    ++ inside;
+                }
+                if (row &lt; gridSize - 1 &amp;&amp; *(*(grid + row + 1) + col) == 1) {
+                    ++ inside;
+                }
+            }
+        }
+    }
+
+    result = result * 4 - inside * 2;
+
+    return result;
+}</code></pre>]]></content>
+      <categories>
+        <category>Log</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
 </search>
