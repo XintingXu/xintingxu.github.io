@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.xuxinting.cn/about/index.html</loc>
+    
+    <lastmod>2020-08-17T13:46:47.176Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.xuxinting.cn/2020/06/02/2020-06-02-Leetcode-463/</loc>
     
     <lastmod>2020-06-02T12:14:29.055Z</lastmod>
@@ -68,13 +75,6 @@
     <loc>http://www.xuxinting.cn/2017/08/23/2017-08-23-About-IRC-VCSS-2017-5/</loc>
     
     <lastmod>2020-05-08T13:41:47.525Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.xuxinting.cn/about/index.html</loc>
-    
-    <lastmod>2020-05-08T13:41:41.265Z</lastmod>
     
   </url>
   
