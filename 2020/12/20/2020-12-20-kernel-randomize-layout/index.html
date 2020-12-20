@@ -20,20 +20,21 @@
     var CONFIG = {"hostname":"www.xuxinting.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="问题描述MySQL服务器运行在内网的一台独立机器上，在其他机器上进行MySQLdb连接的时候出现： 1_mysql_exceptions.OperationalError: (2003, &quot;Can&#39;t connect to MySQL server on &#39;10.108.xxx.xxx&#39; (111)&quot;)  连接方式为Python3 的 MySQLdb包">
+  <meta name="description" content="randomized layout在Linux Kernel的结构体声明中，经常会看见最后带了一个__randomize_layout标识。初次学习，对其机制不太了解，并且网上对其展开描述的内容也不是很多，只有一些英文文档中有介绍。因此，本博客里记录下学习的成果。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL Error2003(111) 问题解决">
-<meta property="og:url" content="http://www.xuxinting.cn/2017/08/24/2017-08-24-A-MySQL-Connect-Error/index.html">
+<meta property="og:title" content="Linux Kernel之randomized layout">
+<meta property="og:url" content="http://www.xuxinting.cn/2020/12/20/2020-12-20-kernel-randomize-layout/index.html">
 <meta property="og:site_name" content="雁家">
-<meta property="og:description" content="问题描述MySQL服务器运行在内网的一台独立机器上，在其他机器上进行MySQLdb连接的时候出现： 1_mysql_exceptions.OperationalError: (2003, &quot;Can&#39;t connect to MySQL server on &#39;10.108.xxx.xxx&#39; (111)&quot;)  连接方式为Python3 的 MySQLdb包">
+<meta property="og:description" content="randomized layout在Linux Kernel的结构体声明中，经常会看见最后带了一个__randomize_layout标识。初次学习，对其机制不太了解，并且网上对其展开描述的内容也不是很多，只有一些英文文档中有介绍。因此，本博客里记录下学习的成果。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2017-08-24T01:35:05.000Z">
-<meta property="article:modified_time" content="2020-05-08T12:59:12.970Z">
+<meta property="article:published_time" content="2020-12-20T12:10:00.000Z">
+<meta property="article:modified_time" content="2020-12-20T12:51:48.587Z">
 <meta property="article:author" content="Xinting Xu">
-<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="kernel">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.xuxinting.cn/2017/08/24/2017-08-24-A-MySQL-Connect-Error/">
+<link rel="canonical" href="http://www.xuxinting.cn/2020/12/20/2020-12-20-kernel-randomize-layout/">
 
 
 <script id="page-configurations">
@@ -46,7 +47,7 @@
   };
 </script>
 
-  <title>MySQL Error2003(111) 问题解决 | 雁家</title>
+  <title>Linux Kernel之randomized layout | 雁家</title>
   
 
 
@@ -199,7 +200,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.xuxinting.cn/2017/08/24/2017-08-24-A-MySQL-Connect-Error/">
+    <link itemprop="mainEntityOfPage" href="http://www.xuxinting.cn/2020/12/20/2020-12-20-kernel-randomize-layout/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/about/xuxinting_1inch_small_image.jpg">
@@ -212,7 +213,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          MySQL Error2003(111) 问题解决
+          Linux Kernel之randomized layout
         </h1>
 
         <div class="post-meta">
@@ -221,23 +222,17 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2017-08-24 09:35:05" itemprop="dateCreated datePublished" datetime="2017-08-24T09:35:05+08:00">2017-08-24</time>
+              <time title="创建时间：2020-12-20 20:10:00 / 修改时间：20:51:48" itemprop="dateCreated datePublished" datetime="2020-12-20T20:10:00+08:00">2020-12-20</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-08 20:59:12" itemprop="dateModified" datetime="2020-05-08T20:59:12+08:00">2020-05-08</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
+                  <a href="/categories/log/" itemprop="url" rel="index"><span itemprop="name">Log</span></a>
                 </span>
             </span>
 
@@ -252,24 +247,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>MySQL服务器运行在内网的一台独立机器上，在其他机器上进行MySQLdb连接的时候出现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_mysql_exceptions.OperationalError: (2003, &quot;Can&#39;t connect to MySQL server on &#39;10.108.xxx.xxx&#39; (111)&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>连接方式为Python3 的 MySQLdb包</p>
-<p>MySQL版本： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5.7.19-0ubuntu0.16.04.1</span><br></pre></td></tr></table></figure>
-
+        <h2 id="randomized-layout"><a href="#randomized-layout" class="headerlink" title="randomized layout"></a>randomized layout</h2><p>在Linux Kernel的结构体声明中，经常会看见最后带了一个<code>__randomize_layout</code>标识。初次学习，对其机制不太了解，并且网上对其展开描述的内容也不是很多，只有一些英文文档中有介绍。因此，本博客里记录下学习的成果。</p>
 <a id="more"></a>
 
-<h2 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h2><p>首先考虑到MySQL服务器没有进行网关的配置，怀疑是网关拦截了连接。</p>
-<p>在网关关闭后，发现还是抛出这个错误，开始Google该问题代码。</p>
-<p>经确认，是MySQL服务默认监听地址有问题。在默认配置下，MySQL会监听127.0.0.1本地IP，如果外部主机尝试进行连接则不被处理</p>
-<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>修改MySQL服务器的配置文件，注释掉监听IP配置</p>
-<p>配置文件路径：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d&#x2F;mysqld.cnf</span><br></pre></td></tr></table></figure>
-
-<p><code>[mysqld]</code> 组中，有一条配置 <code>bind-address = 127.0.0.1</code></p>
-<p>将该条注释掉，然后重启MySQL服务，即可正常连接</p>
+<h2 id="结构体随机化"><a href="#结构体随机化" class="headerlink" title="结构体随机化"></a>结构体随机化</h2><p>不管是地址随机化，还是结构体随机化，其目的都是增强内核安全性。结构体随机化也是GCC编译器的一个重要特性，使能后将在编译时随机排布结构体中元素的顺序，从而使攻击者无法通过地址偏移进行攻击。（存疑，虽然运行时的结构排布与源码可能不一致，但通过结构元素的地址，仍然可以推断出排布形势，只能防范非自适应的攻击，是否可以这样理解？）</p>
+<p>结构体随机化在编译时根据随机数种子打乱排布顺序，但一旦编译完成，结构体内容即确定。（存疑，既然编译时即确定，那么公开发行的二进制版本是可以被反向的，该保护机制是否还有效？以及，调试时，我们能否看到真实的结构体顺序?）</p>
+<p>在Linux Kernel中，结构体中存在函数指针的部分是攻击者重点关注的对象。因此，只存储函数指针的结构体，是默认开启结构体随机化的，如果不需要，需要添加<code>__no_randomize_layout</code>进行排除。另一方面，如果特定结构体希望主动开启保护，需要添加<code>__randomize_layout</code>标识。</p>
+<h2 id="结构体随机化后的差异"><a href="#结构体随机化后的差异" class="headerlink" title="结构体随机化后的差异"></a>结构体随机化后的差异</h2><ol>
+<li>既然已经开启了结构体随机化，在进行赋值或初始化时，就需要按照元素名称进行赋值，否则会出现非预期结果。（designated initializers）</li>
+<li>不要对开启了随机化的结构体指针或对象进行强制数据转换，因为内存排布是不可预测的。</li>
+<li>涉及到远程调用的结构体，如果需要保证结构体内容的一致性，需要添加例外。</li>
+<li>调试时，根据dump推算结构体内容将极为麻烦，因为每个版本、每个平台的布局都将不同。</li>
+<li>部分以模块形式添加到Kernel中的驱动，为保持结构体一致性，在编译时需要采用与kernel相同的随机数种子，这带来了极大的安全风险。</li>
+</ol>
 
     </div>
 
@@ -279,7 +269,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/mysql/" rel="tag"># MySQL</a>
+              <a href="/tags/c/" rel="tag"># C</a>
+              <a href="/tags/kernel/" rel="tag"># kernel</a>
           </div>
 
         
@@ -288,13 +279,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2017/08/23/2017-08-23-About-IRC-VCSS-2017-2/" rel="prev" title="2017暑期学校——历史">
-      <i class="fa fa-chevron-left"></i> 2017暑期学校——历史
+    <a href="/2020/06/02/2020-06-02-Leetcode-459/" rel="prev" title="Leetcode-459 Repeated Substring Pattern">
+      <i class="fa fa-chevron-left"></i> Leetcode-459 Repeated Substring Pattern
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2017/08/30/2017-08-30-VoIP-TroubleShouter-burst-loss/" rel="next" title="VoIP丢包模型与分析">
-      VoIP丢包模型与分析 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -353,7 +341,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-number">2.</span> <span class="nav-text">问题排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-number">3.</span> <span class="nav-text">问题解决</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#randomized-layout"><span class="nav-number">1.</span> <span class="nav-text">randomized layout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E9%9A%8F%E6%9C%BA%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">结构体随机化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E9%9A%8F%E6%9C%BA%E5%8C%96%E5%90%8E%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="nav-number">3.</span> <span class="nav-text">结构体随机化后的差异</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
