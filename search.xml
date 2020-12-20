@@ -1026,4 +1026,31 @@ CSRC list: 0 to 15 items, 32 bits each
         <tag>kernel</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ARM体系结构之TCM</title>
+    <url>/2020/12/20/2020-12-20-arm-TCM/</url>
+    <content><![CDATA[<h2 id="Tightly-Coupled-Memory"><a href="#Tightly-Coupled-Memory" class="headerlink" title="Tightly-Coupled Memory"></a>Tightly-Coupled Memory</h2><p>TCM(Tightly-Coupled Memory)，紧耦合内存，位于SOC内部的片上存储区域，具有极低的访问延迟。类似于Cache，TCM也分为L1TCM和L2TCM。根据存储对象，TCM通常也分为ITMC和DTCM。在使用上，TCM与RAM具有相似的特征。</p>
+<a id="more"></a>
+
+<h2 id="TCM适用对象"><a href="#TCM适用对象" class="headerlink" title="TCM适用对象"></a>TCM适用对象</h2><p>TCM is used for a few things:</p>
+<ul>
+<li>FIQ and other interrupt handlers that need deterministic<br>timing and cannot wait for cache misses.</li>
+<li>Idle loops where all external RAM is set to self-refresh<br>retention mode, so only on-chip RAM is accessible by<br>the CPU and then we hang inside ITCM waiting for an<br>interrupt.</li>
+<li>Other operations which implies shutting off or reconfiguring<br>the external RAM controller.</li>
+</ul>
+<p>TCM适用于以下场景：</p>
+<ul>
+<li>快速中断，或其它不能接受Cache miss或需要确定执行时间的中断处理程序</li>
+<li>当芯片进入低功耗模式时，RAM进入自刷新模式不可访问，只有TCM可以访问，IDLE进程需要在TCM中运行等待中断</li>
+<li>其他需要在RAM不可访问阶段执行的程序</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Log</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+        <tag>arm</tag>
+      </tags>
+  </entry>
 </search>

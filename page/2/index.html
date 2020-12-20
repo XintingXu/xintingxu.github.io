@@ -196,6 +196,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.xuxinting.cn/2017/12/17/2017-12-17-910%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-%E9%9D%9E%E7%89%B9%E6%9D%83LXC%E5%AE%B9%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/about/xuxinting_1inch_small_image.jpg">
+      <meta itemprop="name" content="Xinting Xu">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雁家">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/12/17/2017-12-17-910%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-%E9%9D%9E%E7%89%B9%E6%9D%83LXC%E5%AE%B9%E5%99%A8/" class="post-title-link" itemprop="url">910实验室服务器配置-非特权LXC容器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-17 19:08:39" itemprop="dateCreated datePublished" datetime="2017-12-17T19:08:39+08:00">2017-12-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-08 20:59:58" itemprop="dateModified" datetime="2020-05-08T20:59:58+08:00">2020-05-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/log/" itemprop="url" rel="index"><span itemprop="name">log</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="创建非特权LXC容器"><a href="#创建非特权LXC容器" class="headerlink" title="创建非特权LXC容器"></a>创建非特权LXC容器</h1><p>对于特权容器来说，虽然创建过程比较方便，但存在进程权限的问题，隐形容器的安全性。<br>为了确保服务器用户的误操作不会导致服务器崩溃，经过实验，决定使用非特权容器来进行隔离。</p>
+<h2 id="非特权LXC"><a href="#非特权LXC" class="headerlink" title="非特权LXC"></a>非特权LXC</h2><p>对于非特权的LXC容器来说，容器中实际执行的0号用户ID，并不对应服务器的0号用户ID，从而确保服务器上的内容不会出现问题。</p>
+<p>LXC采用uid映射的方法，将容器中的UID映射到非特权服务器用户的UID空间。</p>
+<p>因为服务器需要挂载一些设备，而只有服务器真实的特权用户可以对设备进行操作，容器内的用户是无法完成这一操作的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/12/17/2017-12-17-910%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-%E9%9D%9E%E7%89%B9%E6%9D%83LXC%E5%AE%B9%E5%99%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.xuxinting.cn/2017/12/16/2017-12-16-910%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA-LXC%E8%99%9A%E6%8B%9F%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -940,91 +1024,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.xuxinting.cn/2017/08/23/2017-08-23-About-IRC-VCSS-2017-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/about/xuxinting_1inch_small_image.jpg">
-      <meta itemprop="name" content="Xinting Xu">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雁家">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/23/2017-08-23-About-IRC-VCSS-2017-3/" class="post-title-link" itemprop="url">2017暑期学校——及时行乐</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-23 15:37:30" itemprop="dateCreated datePublished" datetime="2017-08-23T15:37:30+08:00">2017-08-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-08 21:41:50" itemprop="dateModified" datetime="2020-05-08T21:41:50+08:00">2020-05-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/log/" itemprop="url" rel="index"><span itemprop="name">Log</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="海洋"><a href="#海洋" class="headerlink" title="海洋"></a>海洋</h2><p>海洋和人类的关系，难以用一句话说清楚。但对于来自非沿海城市的孩子，大海还是保留着一份神秘。</p>
-<p>来到青岛，给人的第一感觉，是潮湿。嘲弄海边吹来的海风，在城市中形成了片片云雾，不管是山还是高楼，仿佛直入天际，产生一种虚幻的感觉。</p>
-<p>也许已经好久没来到海边了，从海水浴场到野海滩，等着时间一点点流逝，有种让人难舍难分的感觉。</p>
-<p>在青岛奥帆中心，看过千帆林立，感受着从大海吹来的“海鲜味”海风，给人一种错觉：也许，该归隐了。从奥帆中心的海边向东，穿过一个人行步道，便来到了一处原味的海滩。</p>
-<p>虽然没有梦幻般的沙滩，只有林立的巨石，却让我们度过了几个愉快的下午。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/08/23/2017-08-23-About-IRC-VCSS-2017-3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1096,7 +1095,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1109,7 +1108,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
