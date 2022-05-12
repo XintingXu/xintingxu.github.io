@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.0.2">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -257,19 +257,19 @@
 
 <h2 id="int转二进制字符串"><a href="#int转二进制字符串" class="headerlink" title="int转二进制字符串"></a>int转二进制字符串</h2><p>int转二进制字符串，是最简单的，同时也是形式变化比较多的</p>
 <h3 id="带进制标识0b的转换"><a href="#带进制标识0b的转换" class="headerlink" title="带进制标识0b的转换"></a>带进制标识0b的转换</h3><ol>
-<li>bin()函数 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; bin(3)</span><br><span class="line">&#39;0b11&#39;</span><br><span class="line">&gt;&gt;&gt; bin(-10)</span><br><span class="line">&#39;-0b1010&#39;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>bin()函数 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; bin(3)</span><br><span class="line">&apos;0b11&apos;</span><br><span class="line">&gt;&gt;&gt; bin(-10)</span><br><span class="line">&apos;-0b1010&apos;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>如果需要转换为其他进制，需要使用函数hex()或oct()</p>
 <ol start="2">
-<li>format()函数 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; format(14, &#39;#b&#39;)</span><br><span class="line">&#39;0b1110&#39;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>format()函数 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; format(14, &apos;#b&apos;)</span><br><span class="line">&apos;0b1110&apos;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>如果需要转换为其他进制，只需要将’b’替换为’x’（16进制）或’o’（8进制）</p>
-<h3 id="不带进制表示的转换"><a href="#不带进制表示的转换" class="headerlink" title="不带进制表示的转换"></a>不带进制表示的转换</h3><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; format(14, &#39;b&#39;)</span><br><span class="line">&#39;1110&#39;</span><br></pre></td></tr></table></figure></code></pre><p>如果需要转换为其他进制，只需要将’b’替换为’x’（16进制）或’o’（8进制）</p>
-<h2 id="二进制字符串转int"><a href="#二进制字符串转int" class="headerlink" title="二进制字符串转int"></a>二进制字符串转int</h2><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; int(&quot;1110&quot;,2)</span><br><span class="line">14</span><br></pre></td></tr></table></figure></code></pre><p>如果需要转换为其他进制，只需要将’2’替换为其他数值单位</p>
+<h3 id="不带进制表示的转换"><a href="#不带进制表示的转换" class="headerlink" title="不带进制表示的转换"></a>不带进制表示的转换</h3><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; format(14, &apos;b&apos;)</span><br><span class="line">&apos;1110&apos;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>如果需要转换为其他进制，只需要将’b’替换为’x’（16进制）或’o’（8进制）</p>
+<h2 id="二进制字符串转int"><a href="#二进制字符串转int" class="headerlink" title="二进制字符串转int"></a>二进制字符串转int</h2><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; int(&quot;1110&quot;,2)</span><br><span class="line">14</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>如果需要转换为其他进制，只需要将’2’替换为其他数值单位</p>
 
     </div>
 
@@ -369,7 +369,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -382,23 +382,23 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/XintingXu" title="GitHub → https://github.com/XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/XintingXu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:xxt.no1@gmail.com" title="E-Mail → mailto:xxt.no1@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://weibo.com/xuxinting95" title="Weibo → https://weibo.com/xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="https://weibo.com/xuxinting95" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https://www.facebook.com/XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
       </span>
   </div>
 
@@ -419,19 +419,19 @@
         
 
         
-  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
   </div>
 
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Xinting Xu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
         

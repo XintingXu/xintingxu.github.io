@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.0.2">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -258,36 +258,40 @@
 <p>因为服务器需要挂载一些设备，而只有服务器真实的特权用户可以对设备进行操作，容器内的用户是无法完成这一操作的。</p>
 <a id="more"></a>
 
-<h2 id="检查现有的UID-GID映射表"><a href="#检查现有的UID-GID映射表" class="headerlink" title="检查现有的UID/GID映射表"></a>检查现有的UID/GID映射表</h2><p>通过检查 /etc/subuid 及 /etc/subgid ，得到映射范围。</p>
+<h2 id="检查现有的UID-x2F-GID映射表"><a href="#检查现有的UID-x2F-GID映射表" class="headerlink" title="检查现有的UID&#x2F;GID映射表"></a>检查现有的UID&#x2F;GID映射表</h2><p>通过检查 &#x2F;etc&#x2F;subuid 及 &#x2F;etc&#x2F;subgid ，得到映射范围。</p>
 <p>默认的映射规则为，对于第一个用户</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uid:100000:65536</span><br><span class="line">gid:100000:65536</span><br></pre></td></tr></table></figure>
 
-<h2 id="设定网卡上限"><a href="#设定网卡上限" class="headerlink" title="设定网卡上限"></a>设定网卡上限</h2><p>设置LXC的配置文件 /etc/lxc/lxc-usernet</p>
+<h2 id="设定网卡上限"><a href="#设定网卡上限" class="headerlink" title="设定网卡上限"></a>设定网卡上限</h2><p>设置LXC的配置文件 &#x2F;etc&#x2F;lxc&#x2F;lxc-usernet</p>
 <p>添加类似于”user_name veth lxcbr0 XX”</p>
 <p>的记录，即可将用户”user_name”通过网桥”lxcbr0”创建虚拟网卡的最大数量，限定为”XX”</p>
 <h2 id="修改LXC配置"><a href="#修改LXC配置" class="headerlink" title="修改LXC配置"></a>修改LXC配置</h2><p>以上工作完成后，需要进行配置文件的修改。</p>
-<h3 id="检查文件夹"><a href="#检查文件夹" class="headerlink" title="检查文件夹"></a>检查文件夹</h3><p>如果目录 “<del>/.config/lxc”和”</del>/.local/share/lxc”如果不存在，执行下面两条命令，创建目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~&#x2F;.config&#x2F;lxc</span><br><span class="line">mkdir -p ~&#x2F;.local&#x2F;share&#x2F;lxc</span><br></pre></td></tr></table></figure>
+<h3 id="检查文件夹"><a href="#检查文件夹" class="headerlink" title="检查文件夹"></a>检查文件夹</h3><p>如果目录 “<del>&#x2F;.config&#x2F;lxc”和”</del>&#x2F;.local&#x2F;share&#x2F;lxc”如果不存在，执行下面两条命令，创建目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/.config/lxc</span><br><span class="line">mkdir -p ~/.local/share/lxc</span><br></pre></td></tr></table></figure>
 
-<p>其中，”<del>/.local/share/lxc”即为创建好的容器存储位置，”</del>/.config/lxc”是容器的配置文件存储位置。</p>
-<h2 id="设定配置文件"><a href="#设定配置文件" class="headerlink" title="设定配置文件"></a>设定配置文件</h2><p>将LXC的默认配置文件 “/etc/lxc/default.conf” 复制到 “~/.config/lxc/default.conf”</p>
+<p>其中，”<del>&#x2F;.local&#x2F;share&#x2F;lxc”即为创建好的容器存储位置，”</del>&#x2F;.config&#x2F;lxc”是容器的配置文件存储位置。</p>
+<h2 id="设定配置文件"><a href="#设定配置文件" class="headerlink" title="设定配置文件"></a>设定配置文件</h2><p>将LXC的默认配置文件 “&#x2F;etc&#x2F;lxc&#x2F;default.conf” 复制到 “~&#x2F;.config&#x2F;lxc&#x2F;default.conf”</p>
 <p>并在最后添加两条配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lxc.id_map &#x3D; u 0 100000 65536</span><br><span class="line">lxc.id_map &#x3D; g 0 100000 65536</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lxc.id_map = u 0 100000 65536</span><br><span class="line">lxc.id_map = g 0 100000 65536</span><br></pre></td></tr></table></figure>
+
 <p>需要注意的是，配置中的数字，均应和subuid及sungid对应起来，否则会出现错误。</p>
 <h2 id="重启或重新登陆"><a href="#重启或重新登陆" class="headerlink" title="重启或重新登陆"></a>重启或重新登陆</h2><p>配置完以上内容后，建议重启，或者重新登陆，确保配置生效。</p>
 <h1 id="创建并配置容器"><a href="#创建并配置容器" class="headerlink" title="创建并配置容器"></a>创建并配置容器</h1><h2 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h2><p>对于非特权容器，默认类型必须是”download”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc-create -t download -n XXXX -- --server mirrors6.tuna.tsinghua.edu.cn&#x2F;lxc-images</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc-create -t download -n XXXX -- --server mirrors6.tuna.tsinghua.edu.cn/lxc-images</span><br></pre></td></tr></table></figure>
 
 <p>新创建的LXC容器名即为”XXXX”,通过清华大学的IPv6镜像服务器下载。</p>
 <p>创建过程中，可以选择操作系统类型、版本、架构</p>
 <h2 id="配置容器"><a href="#配置容器" class="headerlink" title="配置容器"></a>配置容器</h2><p>首先开启容器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc-start -n XXXX -d</span><br></pre></td></tr></table></figure>
+
 <p>-d表示以后台模式运行，”XXXX”即为创建的容器名</p>
 <p>之后可以查看容器的状态</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc-info -n XXXX</span><br></pre></td></tr></table></figure>
+
 <p>如果查看结果显示容器正在运行，说明配置及安装正确。</p>
 <p>** 需要注意的是，非特权容器的用户密码并未设定 **<br>需要由宿主机进行设定</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc-attach -n XXXX</span><br></pre></td></tr></table></figure>
+
 <p>即可以root身份登入到”XXXX”容器中</p>
 <p>然后就可以给默认用户设置密码、更改用户权限，LXC容器内的用户即可执行sudo等权限。</p>
 
@@ -373,7 +377,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%9D%9E%E7%89%B9%E6%9D%83LXC%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">创建非特权LXC容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E7%89%B9%E6%9D%83LXC"><span class="nav-number">1.1.</span> <span class="nav-text">非特权LXC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E7%8E%B0%E6%9C%89%E7%9A%84UID-GID%E6%98%A0%E5%B0%84%E8%A1%A8"><span class="nav-number">1.2.</span> <span class="nav-text">检查现有的UID&#x2F;GID映射表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E5%AE%9A%E7%BD%91%E5%8D%A1%E4%B8%8A%E9%99%90"><span class="nav-number">1.3.</span> <span class="nav-text">设定网卡上限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9LXC%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">修改LXC配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">1.4.1.</span> <span class="nav-text">检查文件夹</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E5%AE%9A%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.5.</span> <span class="nav-text">设定配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E6%88%96%E9%87%8D%E6%96%B0%E7%99%BB%E9%99%86"><span class="nav-number">1.6.</span> <span class="nav-text">重启或重新登陆</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E9%85%8D%E7%BD%AE%E5%AE%B9%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">创建并配置容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">创建容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%B9%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">配置容器</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%9D%9E%E7%89%B9%E6%9D%83LXC%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">创建非特权LXC容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E7%89%B9%E6%9D%83LXC"><span class="nav-number">1.1.</span> <span class="nav-text">非特权LXC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E7%8E%B0%E6%9C%89%E7%9A%84UID-x2F-GID%E6%98%A0%E5%B0%84%E8%A1%A8"><span class="nav-number">1.2.</span> <span class="nav-text">检查现有的UID&#x2F;GID映射表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E5%AE%9A%E7%BD%91%E5%8D%A1%E4%B8%8A%E9%99%90"><span class="nav-number">1.3.</span> <span class="nav-text">设定网卡上限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9LXC%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">修改LXC配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">1.4.1.</span> <span class="nav-text">检查文件夹</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E5%AE%9A%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.5.</span> <span class="nav-text">设定配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E6%88%96%E9%87%8D%E6%96%B0%E7%99%BB%E9%99%86"><span class="nav-number">1.6.</span> <span class="nav-text">重启或重新登陆</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E9%85%8D%E7%BD%AE%E5%AE%B9%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">创建并配置容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">创建容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%B9%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">配置容器</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -389,7 +393,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -402,23 +406,23 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/XintingXu" title="GitHub → https://github.com/XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/XintingXu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:xxt.no1@gmail.com" title="E-Mail → mailto:xxt.no1@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://weibo.com/xuxinting95" title="Weibo → https://weibo.com/xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="https://weibo.com/xuxinting95" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https://www.facebook.com/XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
       </span>
   </div>
 
@@ -439,19 +443,19 @@
         
 
         
-  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
   </div>
 
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Xinting Xu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
         

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.0.2">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"www.xuxinting.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="问题描述MySQL服务器运行在内网的一台独立机器上，在其他机器上进行MySQLdb连接的时候出现： 1_mysql_exceptions.OperationalError: (2003, &quot;Can&#39;t connect to MySQL server on &#39;10.108.xxx.xxx&#39; (111)&quot;)  连接方式为Python3 的 MySQLdb包">
+  <meta name="description" content="问题描述MySQL服务器运行在内网的一台独立机器上，在其他机器上进行MySQLdb连接的时候出现： 1_mysql_exceptions.OperationalError: (2003, &quot;Can&amp;apos;t connect to MySQL server on &amp;apos;10.108.xxx.xxx&amp;apos; (111)&quot;)  连接方式为Python3 的 MySQLd">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL Error2003(111) 问题解决">
 <meta property="og:url" content="http://www.xuxinting.cn/2017/08/24/2017-08-24-A-MySQL-Connect-Error/index.html">
 <meta property="og:site_name" content="雁家">
-<meta property="og:description" content="问题描述MySQL服务器运行在内网的一台独立机器上，在其他机器上进行MySQLdb连接的时候出现： 1_mysql_exceptions.OperationalError: (2003, &quot;Can&#39;t connect to MySQL server on &#39;10.108.xxx.xxx&#39; (111)&quot;)  连接方式为Python3 的 MySQLdb包">
+<meta property="og:description" content="问题描述MySQL服务器运行在内网的一台独立机器上，在其他机器上进行MySQLdb连接的时候出现： 1_mysql_exceptions.OperationalError: (2003, &quot;Can&amp;apos;t connect to MySQL server on &amp;apos;10.108.xxx.xxx&amp;apos; (111)&quot;)  连接方式为Python3 的 MySQLd">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-24T01:35:05.000Z">
 <meta property="article:modified_time" content="2020-05-08T12:59:12.970Z">
@@ -253,7 +253,7 @@
 
       
         <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>MySQL服务器运行在内网的一台独立机器上，在其他机器上进行MySQLdb连接的时候出现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_mysql_exceptions.OperationalError: (2003, &quot;Can&#39;t connect to MySQL server on &#39;10.108.xxx.xxx&#39; (111)&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_mysql_exceptions.OperationalError: (2003, &quot;Can&apos;t connect to MySQL server on &apos;10.108.xxx.xxx&apos; (111)&quot;)</span><br></pre></td></tr></table></figure>
 
 <p>连接方式为Python3 的 MySQLdb包</p>
 <p>MySQL版本： </p>
@@ -266,7 +266,7 @@
 <p>经确认，是MySQL服务默认监听地址有问题。在默认配置下，MySQL会监听127.0.0.1本地IP，如果外部主机尝试进行连接则不被处理</p>
 <h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>修改MySQL服务器的配置文件，注释掉监听IP配置</p>
 <p>配置文件路径：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d&#x2F;mysqld.cnf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/mysql/mysql.conf.d/mysqld.cnf</span><br></pre></td></tr></table></figure>
 
 <p><code>[mysqld]</code> 组中，有一条配置 <code>bind-address = 127.0.0.1</code></p>
 <p>将该条注释掉，然后重启MySQL服务，即可正常连接</p>
@@ -369,7 +369,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -382,23 +382,23 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/XintingXu" title="GitHub → https://github.com/XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/XintingXu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:xxt.no1@gmail.com" title="E-Mail → mailto:xxt.no1@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://weibo.com/xuxinting95" title="Weibo → https://weibo.com/xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="https://weibo.com/xuxinting95" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https://www.facebook.com/XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
       </span>
   </div>
 
@@ -419,19 +419,19 @@
         
 
         
-  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
   </div>
 
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Xinting Xu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
         

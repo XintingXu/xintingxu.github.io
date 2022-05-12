@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.0.2">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -273,12 +273,12 @@
 <h3 id="通话控制包"><a href="#通话控制包" class="headerlink" title="通话控制包"></a>通话控制包</h3><p>在拨号和通话建立时，双方会发出一系列ESP协议包，包中包含了主叫、被叫、IP地址、支持的编码格式等等信息。</p>
 <p>不过，需要注意的是，在WireShark中，ESP包的内容是不会解析的。而如果我们需要了解双方的IP、电话号码或者所在基站，则需要换一种方式。</p>
 <p>用文本编辑器，比如NotePad++或者Edit Plus。取决于抓包文件的大小。如果是小文件，可以用NotePad++打开，但如果文件过大，就需要用Edit Plus了。Edit Plus的好处，就是具有64位版本，在数据处理能力上略胜一筹。</p>
-<p><img src="/images/2017-08-08/capture-volte-head.jpg" alt=""></p>
+<p><img src="/images/2017-08-08/capture-volte-head.jpg"></p>
 <p>在开始，可以看见邀请消息“INVITE”，以及双方的电话信息、IPv6地址、所属网络等身份信息。</p>
-<p><img src="/images/2017-08-08/capture-volte-voice-support.jpg" alt=""></p>
+<p><img src="/images/2017-08-08/capture-volte-voice-support.jpg"></p>
 <p>在下面的数据中，可以看到不同语音编码方式，这和WireShark分析得到的PT类型是对应的。并且，不同类型的采样频率，是计算RTP时间戳的重要依据。</p>
 <h2 id="RTP包结构"><a href="#RTP包结构" class="headerlink" title="RTP包结构"></a>RTP包结构</h2><p>RTP包是通过UDP协议进行传输的，在UDP的负载中，包含着RTP的数据帧。</p>
-<p><img src="/images/2017-08-08/capture-rtp-header.jpg" alt=""></p>
+<p><img src="/images/2017-08-08/capture-rtp-header.jpg"></p>
 <pre><code>version (V): 2 bits
   This field identifies the version of RTP.The version defined by
   this specification is two (2).
@@ -295,15 +295,18 @@ padding (P): 1 bit
 
 extension (X): 1 bit
   If the extension bit is set, the fixed header MUST be followed by
-  exactly one header extension, with a format defined below.</code></pre><p><img src="/images/2017-08-08/capture-rtp-header-extension.jpg" alt=""></p>
+  exactly one header extension, with a format defined below.
+  
+</code></pre>
+<p><img src="/images/2017-08-08/capture-rtp-header-extension.jpg"></p>
 <pre><code>  RTP头是否进行了拓展，否则必须按照特定的格式进行。
 
 
 CSRC count (CC): 4 bits
   The CSRC count contains the number of CSRC identifiers that follow
   the fixed header.
-
-
+  
+  
 marker (M): 1 bit
   The interpretation of the marker is defined by a profile.  It is
   intended to allow significant events such as frame boundaries to
@@ -337,7 +340,7 @@ timestamp: 32 bits
   synchronization and jitter calculations.
   RTP头中一个非常重要的字段，可以通过时间戳的变化计算还原一帧的采样时间。
   具体的计算方法见下方。
-
+  
 SSRC: 32 bits
   The SSRC field identifies the synchronization source.  This
   identifier SHOULD be chosen randomly, with the intent that no two
@@ -347,14 +350,18 @@ SSRC: 32 bits
 CSRC list: 0 to 15 items, 32 bits each
   The CSRC list identifies the contributing sources for the payload
   contained in this packet.  The number of identifiers is given by
-  the CC field.</code></pre><h2 id="RTP时间戳计算"><a href="#RTP时间戳计算" class="headerlink" title="RTP时间戳计算"></a>RTP时间戳计算</h2><p>因为RTP在传输的过程中，会对一帧数据进行分包，导致不同的数据包具有相同的TimeStamp。在进行时间还原时，必须跟踪具有不同时间戳的包才具有还原的意义。</p>
+  the CC field.
+  
+  
+</code></pre>
+<h2 id="RTP时间戳计算"><a href="#RTP时间戳计算" class="headerlink" title="RTP时间戳计算"></a>RTP时间戳计算</h2><p>因为RTP在传输的过程中，会对一帧数据进行分包，导致不同的数据包具有相同的TimeStamp。在进行时间还原时，必须跟踪具有不同时间戳的包才具有还原的意义。</p>
 <p>正如之前提到的，RTP Header中的marker代表着一个数据帧的结束，也代表着接下来的数据包将会有不同的TimeStamp值。</p>
 <p>因为RTP的时间戳增量是按照采样时间递增的，所以必须要知道此次传输的数据帧格式。在RTP包格式中，提到过PT字段。PT字段代表着RTP包所传输的数据类型，在我们的VoLTE视频测试中，得到的PT值是115。</p>
 <p>得到PT值之后，需要对照通话控制包中的格式及帧率的对应关系，用来进一步计算。</p>
-<p>以我们的测试为例，对于数据包i和j，具有不同的TimeStamp值<em>T<sub>i</sub><em>和</em>T<sub>j</sub><em>。<br>PT类型115对应的时钟频率为</em>f</em> = 90000 Hz，视频帧率为<em>fps</em> = 30 fps。</p>
+<p>以我们的测试为例，对于数据包i和j，具有不同的TimeStamp值<em>T<sub>i</sub><em>和</em>T<sub>j</sub><em>。<br>PT类型115对应的时钟频率为</em>f</em> &#x3D; 90000 Hz，视频帧率为<em>fps</em> &#x3D; 30 fps。</p>
 <p>那么，真实的数据帧时间间隔是多少呢？</p>
-<p><em>ΔT</em> ＝ (<em>T<sub>i</sub></em> - <em>T<sub>j</sub></em>) / (<em>f</em> / <em>fps</em>) * (1 / <em>fps</em>) (s)</p>
-<p>时间戳的默认递增长度，是时钟频率/帧率，但在我们的测试中，发现其递增规律，并不是严格的3000，而是会在一定范围内浮动。通过数学计算，发现：虽然存在浮动，但仍然存在严格的比例，即TimeStamp的3000对应真实的1/30秒。</p>
+<p><em>ΔT</em> ＝ (<em>T<sub>i</sub></em> - <em>T<sub>j</sub></em>) &#x2F; (<em>f</em> &#x2F; <em>fps</em>) * (1 &#x2F; <em>fps</em>) (s)</p>
+<p>时间戳的默认递增长度，是时钟频率&#x2F;帧率，但在我们的测试中，发现其递增规律，并不是严格的3000，而是会在一定范围内浮动。通过数学计算，发现：虽然存在浮动，但仍然存在严格的比例，即TimeStamp的3000对应真实的1&#x2F;30秒。</p>
 
     </div>
 
@@ -456,7 +463,7 @@ CSRC list: 0 to 15 items, 32 bits each
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -469,23 +476,23 @@ CSRC list: 0 to 15 items, 32 bits each
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/XintingXu" title="GitHub → https://github.com/XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/XintingXu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:xxt.no1@gmail.com" title="E-Mail → mailto:xxt.no1@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://weibo.com/xuxinting95" title="Weibo → https://weibo.com/xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="https://weibo.com/xuxinting95" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https://www.facebook.com/XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
       </span>
   </div>
 
@@ -506,19 +513,19 @@ CSRC list: 0 to 15 items, 32 bits each
         
 
         
-  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
   </div>
 
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Xinting Xu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
         

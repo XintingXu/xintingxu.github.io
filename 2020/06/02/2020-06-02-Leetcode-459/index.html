@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.0.2">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -285,10 +285,12 @@
     }
 
     return result;
-}</code></pre><h3 id="1-2-掐头去尾"><a href="#1-2-掐头去尾" class="headerlink" title="1.2 掐头去尾"></a>1.2 掐头去尾</h3><p>假设一个字符串有子串重复构成，则第一个字符一定是子串的首字符，同时最后一个字符为子串的尾字符。</p>
+}
+</code></pre>
+<h3 id="1-2-掐头去尾"><a href="#1-2-掐头去尾" class="headerlink" title="1.2 掐头去尾"></a>1.2 掐头去尾</h3><p>假设一个字符串有子串重复构成，则第一个字符一定是子串的首字符，同时最后一个字符为子串的尾字符。</p>
 <p>所谓掐头去尾，分别包括掐头和去尾两步。如果字符串由子串重复构成，则字符串中的子串至少出现一次，掐头则破坏了第一个子串，去尾则破坏了最后一个子串。将掐头及去尾的结果拼接，如果中间的部分与原字符串一致，则意味着符合重复条件。</p>
 <p>例如，’abcabcabc’由’abc’重复三次构成，掐头后剩余’bcabcabc’，去尾后剩余’abcabcab’，拼接得到’bcabcabcabcabcab’，重复的结果只剩下四次。在’bcabcabcabcabcab’中搜索’abcabcabc’，如果匹配，则证明符合重复规则。</p>
-<p>如果S由一系列子串构成，即S<sub>1</sub> S<sub>2</sub> S<sub>3</sub> …  S<sub>i</sub> … S<sub>n</sub>。如果S由子串重复构成，则S<sub>1</sub> = S<sub>2</sub> = S<sub>3</sub> = S<sub>i</sub> = S<sub>n</sub>。掐头即破坏S<sub>1</sub>，去尾即破坏S<sub>n</sub>，拼接后的构成为S<sub>2</sub> S<sub>3</sub> …  S<sub>i</sub> … S<sub>n</sub> S<sub>1</sub> S<sub>2</sub> S<sub>3</sub> …  S<sub>i</sub> … S<sub>n-1</sub>。当拼接结果中仍然存在S，则满足S<sub>2</sub> = S<sub>1</sub>，S<sub>3</sub> = S<sub>2</sub>，S<sub>i + 1</sub> = S<sub>i</sub>，S<sub>n</sub> = S<sub>n - 1</sub>，S<sub>n</sub> = S<sub>1</sub>，汇总即S<sub>1</sub> = S<sub>2</sub> = S<sub>3</sub> = S<sub>i</sub> = S<sub>n</sub>。</p>
+<p>如果S由一系列子串构成，即S<sub>1</sub> S<sub>2</sub> S<sub>3</sub> …  S<sub>i</sub> … S<sub>n</sub>。如果S由子串重复构成，则S<sub>1</sub> &#x3D; S<sub>2</sub> &#x3D; S<sub>3</sub> &#x3D; S<sub>i</sub> &#x3D; S<sub>n</sub>。掐头即破坏S<sub>1</sub>，去尾即破坏S<sub>n</sub>，拼接后的构成为S<sub>2</sub> S<sub>3</sub> …  S<sub>i</sub> … S<sub>n</sub> S<sub>1</sub> S<sub>2</sub> S<sub>3</sub> …  S<sub>i</sub> … S<sub>n-1</sub>。当拼接结果中仍然存在S，则满足S<sub>2</sub> &#x3D; S<sub>1</sub>，S<sub>3</sub> &#x3D; S<sub>2</sub>，S<sub>i + 1</sub> &#x3D; S<sub>i</sub>，S<sub>n</sub> &#x3D; S<sub>n - 1</sub>，S<sub>n</sub> &#x3D; S<sub>1</sub>，汇总即S<sub>1</sub> &#x3D; S<sub>2</sub> &#x3D; S<sub>3</sub> &#x3D; S<sub>i</sub> &#x3D; S<sub>n</sub>。</p>
 <p>掐头去尾的时间复杂度为O(n)，空间复杂度为O(n)。</p>
 <pre><code>bool repeatedSubstringPattern(char *s){
     if (s == NULL) {
@@ -311,7 +313,9 @@
 
     free(s_s);
     return result;
-}</code></pre>
+}
+</code></pre>
+
     </div>
 
     
@@ -411,7 +415,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -424,23 +428,23 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/XintingXu" title="GitHub → https://github.com/XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/XintingXu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:xxt.no1@gmail.com" title="E-Mail → mailto:xxt.no1@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://weibo.com/xuxinting95" title="Weibo → https://weibo.com/xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="https://weibo.com/xuxinting95" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https://www.facebook.com/XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
       </span>
   </div>
 
@@ -461,19 +465,19 @@
         
 
         
-  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
   </div>
 
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Xinting Xu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
         

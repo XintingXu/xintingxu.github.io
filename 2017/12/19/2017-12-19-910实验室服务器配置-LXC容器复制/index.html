@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.0.2">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -253,30 +253,31 @@
 
       
         <p>为减少容器的配置工作，为用户创建自己的容器之前，预先配置好了一个模板容器。其他用户的容器可以基于该模板进行创建。</p>
-<p>在我们的配置中，有一个特殊点，就是容器中的/home目录，与~/SSD目录，是单独存储的。并且在LXC的配置测试中，发现如果在宿主机中进行其它mount操作，将导致LXC容器无法启动。所以，对以上涉及的几个目录，需要逐步修改config，并在容器内进行相应配置。</p>
+<p>在我们的配置中，有一个特殊点，就是容器中的&#x2F;home目录，与~&#x2F;SSD目录，是单独存储的。并且在LXC的配置测试中，发现如果在宿主机中进行其它mount操作，将导致LXC容器无法启动。所以，对以上涉及的几个目录，需要逐步修改config，并在容器内进行相应配置。</p>
 <a id="more"></a>
 
 <h2 id="正常启动容器"><a href="#正常启动容器" class="headerlink" title="正常启动容器"></a>正常启动容器</h2><p>首先取消容器内的所有挂载，然后正常启动容器。如果容器正常启动，则证明容器的内容没有基本错误。</p>
-<h2 id="修改容器的主机名"><a href="#修改容器的主机名" class="headerlink" title="修改容器的主机名"></a>修改容器的主机名</h2><p>修改容器的rootfs/etc/hostname，修改继承的主机名。</p>
+<h2 id="修改容器的主机名"><a href="#修改容器的主机名" class="headerlink" title="修改容器的主机名"></a>修改容器的主机名</h2><p>修改容器的rootfs&#x2F;etc&#x2F;hostname，修改继承的主机名。</p>
 <p>同时修改容器的config文件中，lxc.utsname，改为与hostname同样的主机名。</p>
 <p>重启容器，检查修改是否有效。</p>
-<h2 id="挂载home目录"><a href="#挂载home目录" class="headerlink" title="挂载home目录"></a>挂载home目录</h2><p>停止容器，将rootfs/home/ 下的全部文件移到设定的挂载目录。</p>
+<h2 id="挂载home目录"><a href="#挂载home目录" class="headerlink" title="挂载home目录"></a>挂载home目录</h2><p>停止容器，将rootfs&#x2F;home&#x2F; 下的全部文件移到设定的挂载目录。</p>
 <p>修改config配置文件，添加对应的lxc.mount.entry配置，例如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc.mount.entry &#x3D; &#x2F;mnt&#x2F;HDD&#x2F;XXXX home none bind 0 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc.mount.entry = /mnt/HDD/XXXX home none bind 0 0</span><br></pre></td></tr></table></figure>
 
-<p>并且，将/mnt/HDD/XXXX/下的所有目录添加读、写、执行权限。</p>
+<p>并且，将&#x2F;mnt&#x2F;HDD&#x2F;XXXX&#x2F;下的所有目录添加读、写、执行权限。</p>
 <p>启动容器，检查是否正常。</p>
 <h2 id="新建用户及用户目录"><a href="#新建用户及用户目录" class="headerlink" title="新建用户及用户目录"></a>新建用户及用户目录</h2><p>启动容器后，attach到容器内，以root身份创建用户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -s &#x2F;bin&#x2F;bash XXXX</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -s /bin/bash XXXX</span><br></pre></td></tr></table></figure>
+
 <p>添加新用户XXXX，并创建其用户目录。</p>
-<p>在/mnt/HDD/XXXX/中，给新创建的用户目录赋予7777权限。</p>
+<p>在&#x2F;mnt&#x2F;HDD&#x2F;XXXX&#x2F;中，给新创建的用户目录赋予7777权限。</p>
 <p>登录到新创建的用户，创建一个用于挂载其他路径的目录，在我们的使用中，新的挂载点是SSD。</p>
 <h2 id="将其他目录挂载在新用户"><a href="#将其他目录挂载在新用户" class="headerlink" title="将其他目录挂载在新用户"></a>将其他目录挂载在新用户</h2><p>关闭容器。</p>
 <p>更改容器的config文件，添加新的mount配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc.mount.entry &#x3D; &#x2F;mnt&#x2F;SSD&#x2F;XXXX home&#x2F;XXXX&#x2F;SSD none bind 0 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lxc.mount.entry = /mnt/SSD/XXXX home/XXXX/SSD none bind 0 0</span><br></pre></td></tr></table></figure>
 
 <p>现在重新启动容器，检查挂载是否成功。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>经过以上几步，不仅将容器中的/home目录转移到其它的可靠位置，也在用户目录下新添加了一个其他的挂载点，在使用中具有更好的效果。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>经过以上几步，不仅将容器中的&#x2F;home目录转移到其它的可靠位置，也在用户目录下新添加了一个其他的挂载点，在使用中具有更好的效果。</p>
 
     </div>
 
@@ -376,7 +377,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -389,23 +390,23 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/XintingXu" title="GitHub → https://github.com/XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/XintingXu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XintingXu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:xxt.no1@gmail.com" title="E-Mail → mailto:xxt.no1@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://weibo.com/xuxinting95" title="Weibo → https://weibo.com/xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="https://weibo.com/xuxinting95" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;xuxinting95" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https://www.facebook.com/XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+        <a href="https://www.facebook.com/XintingXu95" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;XintingXu95" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
       </span>
   </div>
 
@@ -426,19 +427,19 @@
         
 
         
-  <div class="beian"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19044096号-1 </a>
   </div>
 
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Xinting Xu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
         
